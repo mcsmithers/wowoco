@@ -11,12 +11,12 @@ using Newtonsoft.Json;
 
 namespace ecard.Pages
 {
-    public class FormModel : PageModel
+    public class QuestionnaireModel : PageModel
     {
 
         // WOWOCO: 1
         [BindProperty]
-        public Greetings _myGreetings { get; set; }
+        public Questions _myQuestions { get; set; }
 
         // WOWOCO: 2
         private DbBridge _myDbBridge { get; set; }
@@ -25,7 +25,7 @@ namespace ecard.Pages
         private IConfiguration _myConfiguration { get; set; }
 
         // WOWOCO: 4
-        public FormModel(DbBridge DbBridge, IConfiguration Configuration)
+        public QuestionsModel(DbBridge DbBridge, IConfiguration Configuration)
         {
             _myDbBridge = DbBridge;
             _myConfiguration = Configuration;
@@ -47,27 +47,30 @@ namespace ecard.Pages
                 {
                     try
                     {
-                        _myGreetings.senderemail = _myGreetings.senderemail.ToLowerInvariant();
-                        _myGreetings.friendemail = _myGreetings.friendemail.ToUpperInvariant();
+                        _myQuestions.season = _myQuestions.season.ToLowerInvariant();
+                        _myQuestions.meal = _myQuestions.meal.ToUpperInvariant();
+                        _myQuestions.history = _myQuestions.history.ToLowerInvariant();
+                        _myQuestions.language = _myQuestions.language.ToUpperInvariant();
+                        _myQuestions.astronomical = _myQuestions.astronomical.ToUpperInvariant();
 
                         // DB Related add record
-                        _myDbBridge.Greetings.Add(_myGreetings);
+                        _myDbBridge.Questions.Add(_myQuestions);
                         _myDbBridge.SaveChanges();
 
                         //REDIRECT to the page with a new operator (name/value pair)
-                        return RedirectToPage("Form", new { id = _myGreetings.ID });
+                        return RedirectToPage("Questionnaire", new { id = _myQuestions.ID });
                     }
 
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex);
-                        return RedirectToPage("Form");
+                        return RedirectToPage("Questions");
                     }
                 }
             }
             else
             {
-                ModelState.AddModelError("_myGreetings.reCaptcha", "Please verify you're not a robot!");
+                ModelState.AddModelError("_myQuestions.reCaptcha", "Please verify you're not a robot!");
             }
 
             return Page();

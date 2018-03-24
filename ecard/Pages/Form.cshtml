@@ -1,45 +1,68 @@
 ﻿@page
 @model FormModel
-<div class="container">
-    <br />
-    <img src="http://www.placepuppy.net/400/250"><br/><br/>
-    <div class="col">
-        <h2>Send a Card</h2>
-        <form action="(webpage)" method="post">
-            <div class="form-group"><label for="email"><i class="fa fa-envelope"></label></i><input inputmode="email" name="email" placeholder="name@fabulous.io" class="form-control" sr-only="email" required></div>
-            <div class="form-group"><label for="name"></label><i class="fa fa-user"></i><input name="text" inputmode="verbatim" placeholder="Name" class="form-control" sr-only="name"></div>
-            <div class="form-group"><label for="subject"></label><i class="fa fa-comment"></i><input name="text" inputmode="verbatim" placeholder="Subject" class="form-control" sr-only="subject"></div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="message"></label>
-                    <i class="fa fa-comments"></i>
-                    <textarea placeholder="Message" class="form-control js-auto-size" sr-only="message" maxlength="50"></textarea><div class="countdown"></div>
-                </div>
-            </div>
+@{
+    ViewBag.meta_title = "Forms";
+    ViewBag.meta_keywords = "";
+    ViewBag.meta_desc = "";
+    ViewBag.theme = "birthday";
+}
 
-            <div class="form-group">
-                <label for="event"></label>
-                <i class="fa fa-birthday-cake"></i>
-                <select name="event" class="form-control" sr-only="event">
-                    <option value="birthday">Birthday</option>
-                    <option value="holiday">Holiday</option>
-                    <option value="thanks">Thank You</option>
-                </select>
-            </div><br />
-            <label for="captcha">Prove you are human</label><div class="form-row"><div class="g-recaptcha" data-sitekey="6LctqEUUAAAAAHaN_sYP_vjTJgatqMmDr-l9OTdq" sr-only="captcha"></div></div>
-            @section Scripts {
-        <script src="~/lib/textarea-countdown.js"></script>
-        <script src='https://www.google.com/recaptcha/api.js'></script>
-        <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-        <script src="jquery.textarea_autosize.min.js"></script>
-        <script>
-            $('textarea.js-auto-size').textareaAutoSize();
-        </script>
-            }
+<div class="container">
+
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="@Model._myGreetings.friendname"></label>
+            <input asp-for="@Model._myGreetings.friendname" type="text" class="form-control" />
+            <span asp-validation-for="@Model._myGreetings.friendname" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model._myGreetings.friendemail"></label>
+            <input asp-for="@Model._myGreetings.friendemail" type="email" class="form-control" />
+            <span asp-validation-for="@Model._myGreetings.friendemail" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model._myGreetings.subject"></label>
+            <input asp-for="@Model._myGreetings.subject" type="text" class="form-control" />
+            <span asp-validation-for="@Model._myGreetings.subject" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model._myGreetings.message"></label>
+            <textarea asp-for="@Model._myGreetings.message" class="form-control" maxlength="100"></textarea>
+            <div class="countdown"></div>
+            <span asp-validation-for="@Model._myGreetings.message" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model._myGreetings.sendername"></label>
+            <input asp-for="@Model._myGreetings.sendername" type="text" class="form-control" />
+            <span asp-validation-for="@Model._myGreetings.sendername" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model._myGreetings.senderemail"></label>
+            <input asp-for="@Model._myGreetings.senderemail" type="email" class="form-control" />
+            <span asp-validation-for="@Model._myGreetings.senderemail" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6Le-Jy0UAAAAAMyxngpkD12DzzXto51KmZNciDG2"></div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </form>
+
 </div>
-        </form>
-        <button type="button" class="btn btn-primary active">Submit</button></br>
-    </div>
-<br/>
-<hr>
-@Html.Encode("WoWoCo")
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <!-- BEGIN: TEXTAREA AUTOSIZE -->
+    <script src="~/lib/textarea-autosize/dist/jquery.textarea_autosize.js"></script>
+    <script>
+        $('textarea').textareaAutoSize();
+    </script>
+    <!-- END: TEXTAREA AUTOSIZE -->
+
+    <script src="~/lib/textarea-countdown.js"></script>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+}

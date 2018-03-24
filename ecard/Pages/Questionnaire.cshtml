@@ -1,0 +1,67 @@
+﻿@page
+@model QuestionnaireModel
+@{
+    ViewBag.meta_title = "Questionnaire";
+    ViewBag.meta_keywords = "";
+    ViewBag.meta_desc = "";
+    ViewBag.theme = "hello";
+}
+
+<div class="container">
+
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="@Model._myQuestions.season"></label>
+            <input asp-for="@Model._myQuestions.season" type="text" class="form-control" />
+            <span asp-validation-for="@Model._myQuestions.season" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model._myQuestions.animal"></label>
+            <input asp-for="@Model._myQuestions.animal" type="text" class="form-control" />
+            <span asp-validation-for="@Model._myQuestions.animal" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model._myQuestions.language"></label>
+            <input asp-for="@Model._myQuestions.language" type="text" class="form-control" />
+            <span asp-validation-for="@Model._myQuestions.language" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model._myQuestions.history"></label>
+            <input asp-for="@Model._myQuestions.history" type="text" class="form-control" ></input>
+            <span asp-validation-for="@Model._myQuestions.history" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model._myQuestions.meal"></label>
+            <input asp-for="@Model._myQuestions.meal" type="text" class="form-control" />
+            <span asp-validation-for="@Model._myQuestions.meal" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model._myQuestions.astronomical"></label>
+            <input asp-for="@Model._myQuestions.astronomical" type="text" class="form-control" />
+            <span asp-validation-for="@Model._myQuestions.astronomical" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6Le-Jy0UAAAAAMyxngpkD12DzzXto51KmZNciDG2"></div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </form>
+
+</div>
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <!-- BEGIN: TEXTAREA AUTOSIZE -->
+    <script src="~/lib/textarea-autosize/dist/jquery.textarea_autosize.js"></script>
+    <script>
+        $('textarea').textareaAutoSize();
+    </script>
+    <!-- END: TEXTAREA AUTOSIZE -->
+
+    <script src="~/lib/textarea-countdown.js"></script>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+}
